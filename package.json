@@ -3,6 +3,7 @@
     "axios": "^0.27.2"
   },
   "dependencies": {
-    "aws-sdk": "^2.1135.0"
+    "aws-sdk": "^2.1135.0",
+    "dotenv": "^16.0.1"
   }
 }
