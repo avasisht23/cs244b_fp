@@ -1,8 +1,8 @@
 {
-  "name": "darkpool-server",
+  "name": "darkpool-client",
   "version": "1.0.0",
-  "description": "Simple dark pool server implementation for CS244b project",
-  "main": "server.js",
+  "description": "Simple dark pool client implementation for CS244b project",
+  "main": "client.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
