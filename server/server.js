@@ -38,13 +38,15 @@ app.post("/sendOrder", async (req, res) => {
    return;
  }
 
- if (side !== "BUY" && side !== "SELL") {
-   res.status(400).json({ error: `the side must be either BUY or SELL` });
+ if (side !== "BID" && side !== "ASK") {
+   res.status(400).json({ error: `the side must be either BID or ASK` });
    return;
  }
 
  let orderNumber = currOrderNumber;
  currOrderNumber +=1;
+
+ console.log(`Successfully received ${side} order for asset $${asset} @ ${limitPrice} and returned order Number ${orderNumber}`);
 
  res.json({ orderNumber: orderNumber });
 });
