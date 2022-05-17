@@ -1,0 +1,5 @@
+﻿Order#,Asset,LimitPrice,Side,Order#,Asset,LimitPrice,Side
+1,AAPL,55,"""BUY""",45,"""AAPL""",55,"""SELL"""
+56,AAPL,54,"""BUY""",21,AAPL,54,"""SELL"""
+72,AAPL,60,"""BUY""",210,AAPL,60,"""SELL"""
+143,AAPL,50,"""BUY""",77,AAPL,50,"""SELL"""
