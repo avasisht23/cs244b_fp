@@ -1,3 +1,3 @@
-For request:
+to start up server:
 
-`node client.js AAPL 100 BID`
+node server.js
