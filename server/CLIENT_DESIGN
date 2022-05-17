@@ -1,0 +1,32 @@
+1. SubmitOrder(order)
+    1. append(order) —> to Hotstuff via grpc
+        1. After it receives confirmation of order continue. If not exit.
+    2. submit same order to darkpool
+    3. ping s3 bucket, if order found call getIndex on order and check if hash is after yours
+        1. if it is, “sec”
+        2. if it is not, exit thread
+
+
+S3 bucket:
+
+[buy_order1, sell_order1]
+
+[buy_order2, sell_order2]
+
+
+order {
+
+“asset”: STR,
+
+“limit_price”: INT
+
+“side”: enum{BID, ASK}
+
+}
+
+**Ledger operations**
+
+1. append()
+    1. Adds a hashed transaction to the ledger
+2. getIndex()
+    1. Find the index of a hashed transaction on the ledger
