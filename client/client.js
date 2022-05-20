@@ -16,11 +16,15 @@ const darkpoolPort = 800
 const hotStuffPorts = [0,0,0,0]
 const sleepCadence = 30000 // 30 seconds
 
+// Appends order to hotstuff ledger
 async function append(order){
   for (const port of hotStuffPorts) {
     axios.post(`https://localhost:${port}`, order)
       .then(function (response) {
         console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limit_price} to HotStuff Node ${port}`);
+        if(response.data.isLeader){
+          return response.data.index;
+        }
       })
       .catch(function (error) {
         console.log(`Failed submission ${side} order for asset $${asset} @ ${limit_price} to HotStuff Node ${port}`);
@@ -28,6 +32,7 @@ async function append(order){
   }
 }
 
+// Gets index of order in hotstuff ledger
 async function getIndex(order){
   for (const port of hotStuffPorts) {
     axios.get(`https://localhost:${port}/index?asset=${order.asset}&limit_price=${order.limit_price}&side=${side}`)
@@ -52,8 +57,10 @@ async function main() {
       side: side
     }
 
+  let hashedOrder = createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex')
+
   // 1. append(order) —> to Hotstuff via REST
-  await append(order);
+  let ourIndex = await append(order);
 
   var token;
 
@@ -70,24 +77,24 @@ async function main() {
 
   var s3 = new aws.S3();
 
-  var params = {
+  var filledOrder = {
    Bucket: BUCKET,
-   Key: createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex')
+   Key: hashedOrder
   }
 
   // 3. ping s3 bucket, if order found call getIndex on order and check if hash is after yours
   while (True){
     var found = False;
 
-    const data = s3.getObject(params, function(err, data) {
+    const data = s3.getObject(filledOrder, function(err, data) {
       if (err) {
         console.log(err, err.stack)
       }
       else {
         // 4. getIndex(other filled order) <- Hotstuff via rest
-        let filledIndex = await getIndex(params)
+        let filledIndex = await getIndex(filledOrder)
         if(ourIndex <= filledIndex){
-          console.log("FRONTRUNNING OCCURRED");
+          console.log("FRONTRUNNING OCCURRED, CALL GARY");
         }
         found = True;
       }
