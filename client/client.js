@@ -12,32 +12,61 @@ const {
 
 aws.config.update({accessKeyId: ACCESS_KEY_ID, secretAccessKey: SECRET_KEY, region: REGION});
 
-const port = 8000
+const darkpoolPort = 800
+const hotStuffPorts = [0,0,0,0]
 const sleepCadence = 30000 // 30 seconds
+
+async function append(order){
+  for (const port of hotStuffPorts) {
+    axios.post(`https://localhost:${port}`, order)
+      .then(function (response) {
+        console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limit_price} to HotStuff Node ${port}`);
+      })
+      .catch(function (error) {
+        console.log(`Failed submission ${side} order for asset $${asset} @ ${limit_price} to HotStuff Node ${port}`);
+      });
+  }
+}
+
+async function getIndex(order){
+  for (const port of hotStuffPorts) {
+    axios.get(`https://localhost:${port}/index?asset=${order.asset}&limit_price=${order.limit_price}&side=${side}`)
+      .then(function (response) {
+        console.log(`Successfully queried ${side} order for asset $${asset} @ ${limit_price} from HotStuff Node ${port}`);
+        if(response.data.isLeader){
+          return response.data.index;
+        }
+      })
+      .catch(function (error) {
+        console.log(`Failed to query ${side} order for asset $${asset} @ ${limit_price} from HotStuff Node ${port}`);
+      });
+  }
+}
 
 async function main() {
   let [asset, limit_price, side] = process.argv.slice(2);
 
-  // 1. append(order) —> to Hotstuff via grpc
+  let order = {
+      asset: asset,
+      limit_price: limit_price,
+      side: side
+    }
+
+  // 1. append(order) —> to Hotstuff via REST
+  await append(order);
+
+  var token;
 
   // 2. submit order to darkpool
-  axios.post(`http://localhost:${port}/sendOrder`, {
-      asset: asset,
-      limitPrice: limit_price,
-      side: side
-    })
+  axios.post(`https://localhost:${darkpoolPort}/sendOrder`, order)
     .then(function (response) {
       console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limit_price}`);
-      //@CHUD, make sure u store the value returned in the JSON response
-
+      token = response.data.token;
     })
     .catch(function (error) {
       console.log(`Failed submission ${side} order for asset $${asset} @ ${limit_price}`);
       console.log(`error: ${error}`);
     });
-
-    await new Promise(resolve => setTimeout(resolve, 3000)); //TEMPORARY UNTIL WE GET THE AWS STUFF SET UP
-
 
   var s3 = new aws.S3();
 
@@ -46,29 +75,29 @@ async function main() {
    Key: createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex')
   }
 
-  //@CHUD, commented this out since it was causing error since not connectied to AWS bucket yet. u can uncomment whenever
   // 3. ping s3 bucket, if order found call getIndex on order and check if hash is after yours
-  // while (true){
-  //   var found = false;
-  //
-  //   const data = s3.getObject(params, function(err, data) {
-  //     if (err) {
-  //       console.log(err, err.stack)
-  //     }
-  //     else {
-  //       // 4. getIndex(other filled order) <- Hotstuff via grpc
-  //       // if legal, "no frontrunning"
-  //       // else "sec"
-  //
-  //       found = true;
-  //     }
-  //   })
-  //
-  //   if (found) break;
-  //
-  //   // Sleep
-  //   await new Promise(resolve => setTimeout(resolve, sleepCadence));
-  //}
+  while (True){
+    var found = False;
+
+    const data = s3.getObject(params, function(err, data) {
+      if (err) {
+        console.log(err, err.stack)
+      }
+      else {
+        // 4. getIndex(other filled order) <- Hotstuff via rest
+        let filledIndex = await getIndex(params)
+        if(ourIndex <= filledIndex){
+          console.log("FRONTRUNNING OCCURRED");
+        }
+        found = True;
+      }
+    })
+
+    if (found) break;
+
+    // Sleep
+    await new Promise(resolve => setTimeout(resolve, sleepCadence));
+  }
 }
 
 // We recommend this pattern to be able to use async/await everywhere
