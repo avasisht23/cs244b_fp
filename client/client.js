@@ -35,7 +35,7 @@ async function append(order){
 // Gets index of order in hotstuff ledger
 async function getIndex(order){
   for (const port of hotStuffPorts) {
-    axios.get(`https://localhost:${port}/index?asset=${order.asset}&limit_price=${order.limit_price}&side=${side}`)
+    axios.get(`https://localhost:${port}/index?order=${order}`)
       .then(function (response) {
         console.log(`Successfully queried ${side} order for asset $${asset} @ ${limit_price} from HotStuff Node ${port}`);
         if(response.data.isLeader){
@@ -50,17 +50,19 @@ async function getIndex(order){
 
 async function main() {
   let [asset, limit_price, side] = process.argv.slice(2);
+  let userID = Date.now();
 
   let order = {
       asset: asset,
       limit_price: limit_price,
-      side: side
+      side: side,
+      userID: userID
     }
 
-  let hashedOrder = createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex')
+  let hashedOrder = createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex') + userID.toString('utf-8')
 
   // 1. append(order) —> to Hotstuff via REST
-  let ourIndex = await append(order);
+  let ourIndex = await append(hashedOrder);
 
   var token;
 
@@ -92,7 +94,7 @@ async function main() {
       }
       else {
         // 4. getIndex(other filled order) <- Hotstuff via rest
-        let filledIndex = await getIndex(filledOrder)
+        let filledIndex = await getIndex(hashedOrder + data.Body.toString('utf-8'))
         if(ourIndex <= filledIndex){
           console.log("FRONTRUNNING OCCURRED, CALL GARY");
         }
