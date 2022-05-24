@@ -2,6 +2,16 @@
 
 ## Hotstuff
 
+To run, do
+
+```
+./autogen.sh
+./configure
+make -j
+./test
+
+```
+
 Make sure to create this ```/usr/local/Cellar/lmdb/0.9.29/lib/pkgconfig/lmdb.pc``` file and add 
 ```
 prefix=/usr/local/Cellar/lmdb/0.9.29
