@@ -18,18 +18,20 @@ const sleepCadence = 30000 // 30 seconds
 
 // Appends order to hotstuff ledger
 async function append(order, hashedOrder){
+  var r;
   for (const port of hotStuffPorts) {
     await axios.post(`http://localhost:${port}`, {order: hashedOrder})
       .then(function (response) {
         console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${port}`);
         if(response.data.isLeader){
-          return response.data.index;
+          r = response.data.index;
         }
       })
       .catch(function (error) {
         console.log(`Failed submission ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${port}`);
       });
   }
+  return r;
 }
 
 // Get client id
@@ -48,18 +50,20 @@ async function getNewClientId(){
 
 // Gets index of order in hotstuff ledger
 async function getIndex(order, hashedOrder){
+  var r;
   for (const port of hotStuffPorts) {
     await axios.get(`http://localhost:${port}/index?order=${hashedOrder}`)
       .then(function (response) {
         console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${port}`);
         if(response.data.isLeader){
-          return response.data.index;
+          r = response.data.index;
         }
       })
       .catch(function (error) {
         console.log(`Failed to query ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${port}`);
       });
   }
+  return r;
 }
 
 async function main() {
