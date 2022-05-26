@@ -19,7 +19,7 @@ const sleepCadence = 30000 // 30 seconds
 // Appends order to hotstuff ledger
 async function append(order, hashedOrder){
   for (const port of hotStuffPorts) {
-    axios.post(`http://localhost:${port}`, hashedOrder)
+    axios.post(`http://localhost:${port}`, {order: hashedOrder})
       .then(function (response) {
         console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${port}`);
         if(response.data.isLeader){
@@ -71,7 +71,7 @@ async function main() {
       clientId: clientId
     }
 
-  let hashedOrder = createHash('sha256').update(`${asset}${limitPrice}${side}`).digest('hex') + clientId
+  let hashedOrder = createHash('sha256').update(`${asset}${limitPrice}${side}`).digest('hex') + "," + clientId
 
   // 1. append(order) —> to Hotstuff via REST
   let ourIndex = await append(order, hashedOrder);
@@ -79,7 +79,7 @@ async function main() {
   var token;
 
   // 2. submit order to darkpool
-  axios.post(`http://localhost:${darkpoolPort}/sendOrder`, order)
+  axios.post(`http://localhost:${darkpoolPort}/sendOrder`, JSON.stringify(order))
     .then(function (response) {
       console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limitPrice}`);
       token = response.data.orderNumber;
@@ -106,7 +106,7 @@ async function main() {
       }
       else {
         // 4. getIndex(other filled order) <- Hotstuff via rest
-        let filledIndex = await getIndex(order, hashedOrder + data.Body.toString('utf-8'))
+        let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + data.Body.toString('utf-8'))
         if(ourIndex <= filledIndex){
           console.log("FRONTRUNNING OCCURRED, CALL GARY");
         }
