@@ -12,7 +12,7 @@ const {
 
 aws.config.update({accessKeyId: ACCESS_KEY_ID, secretAccessKey: SECRET_KEY, region: REGION});
 
-const darkpoolPort = 800
+const darkpoolPort = 8000
 const hotStuffPorts = [0,0,0,0]
 const sleepCadence = 30000 // 30 seconds
 
