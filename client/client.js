@@ -38,6 +38,8 @@ async function getNewClientId(){
     .then(function (response) {
       console.log(`Successfully got new client id`);
       console.log(response)
+      console.log(response.data)
+      console.log(response.data.clientId)
       return response.data.clientId;
     })
     .catch(function (error) {
