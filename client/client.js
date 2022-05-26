@@ -7,7 +7,7 @@ const {
   ACCESS_KEY_ID,
   SECRET_KEY,
   REGION,
-  BUCKET,
+  TABLE_NAME,
 } = require("../aws-spec");
 
 aws.config.update({accessKeyId: ACCESS_KEY_ID, secretAccessKey: SECRET_KEY, region: REGION});
@@ -96,25 +96,27 @@ async function main() {
       console.log(`error: ${error}`);
     });
 
-  var s3 = new aws.S3();
+  var ddb = new aws.DynamoDB();
 
   var filledOrder = {
-   Bucket: BUCKET,
-   Key: hashedOrder
+   TableName: TABLE_NAME,
+   Key: {
+    'hash': {S: hashedOrder}
+   }
   }
 
   // 3. ping s3 bucket, if order found call getIndex on order and check if hash is after yours
   while (true){
     var found = false;
 
-    const data = await s3.getObject(filledOrder, async function(err, data) {
+    const data = await s3.getItem(filledOrder, async function(err, data) {
       if (err) {
         console.log(err, err.stack)
       }
       else {
         // 4. getIndex(other filled order) <- Hotstuff via rest
-        let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + data.Body.toString('utf-8'))
-        if(ourIndex <= filledIndex){
+        let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + data.Item.toString('utf-8'))
+        if(ourIndex < filledIndex){
           console.log("FRONTRUNNING OCCURRED, CALL GARY");
         }
         found = true;
