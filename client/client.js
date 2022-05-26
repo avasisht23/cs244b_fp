@@ -32,6 +32,18 @@ async function append(order, hashedOrder){
   }
 }
 
+// Get client id
+async function getNewClientId(){
+  axios.get(`https://localhost:${darkpoolPort}/getNewClientId`)
+    .then(function (response) {
+      console.log(`Successfully got new client id`);
+      return response.data.clientId.toString();
+    })
+    .catch(function (error) {
+      console.log(`Failed to get new client id`);
+    });
+}
+
 // Gets index of order in hotstuff ledger
 async function getIndex(order, hashedOrder){
   for (const port of hotStuffPorts) {
@@ -50,7 +62,7 @@ async function getIndex(order, hashedOrder){
 
 async function main() {
   let [asset, limit_price, side] = process.argv.slice(2);
-  let userID = Date.now();
+  let userID = await getNewClientId();
 
   let order = {
       asset: asset,
@@ -59,7 +71,7 @@ async function main() {
       userID: userID
     }
 
-  let hashedOrder = createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex') + userID.toString()
+  let hashedOrder = createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex') + userID
 
   // 1. append(order) —> to Hotstuff via REST
   let ourIndex = await append(order, hashedOrder);
