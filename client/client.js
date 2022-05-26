@@ -17,33 +17,33 @@ const hotStuffPorts = [0,0,0,0]
 const sleepCadence = 30000 // 30 seconds
 
 // Appends order to hotstuff ledger
-async function append(order){
+async function append(order, hashedOrder){
   for (const port of hotStuffPorts) {
-    axios.post(`https://localhost:${port}`, order)
+    axios.post(`https://localhost:${port}`, hashedOrder)
       .then(function (response) {
-        console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limit_price} to HotStuff Node ${port}`);
+        console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limit_price} to HotStuff Node ${port}`);
         if(response.data.isLeader){
           return response.data.index;
         }
       })
       .catch(function (error) {
-        console.log(`Failed submission ${side} order for asset $${asset} @ ${limit_price} to HotStuff Node ${port}`);
+        console.log(`Failed submission ${order.side} order for asset $${order.asset} @ ${order.limit_price} to HotStuff Node ${port}`);
       });
   }
 }
 
 // Gets index of order in hotstuff ledger
-async function getIndex(order){
+async function getIndex(order, hashedOrder){
   for (const port of hotStuffPorts) {
-    axios.get(`https://localhost:${port}/index?order=${order}`)
+    axios.get(`https://localhost:${port}/index?order=${hashedOrder}`)
       .then(function (response) {
-        console.log(`Successfully queried ${side} order for asset $${asset} @ ${limit_price} from HotStuff Node ${port}`);
+        console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limit_price} from HotStuff Node ${port}`);
         if(response.data.isLeader){
           return response.data.index;
         }
       })
       .catch(function (error) {
-        console.log(`Failed to query ${side} order for asset $${asset} @ ${limit_price} from HotStuff Node ${port}`);
+        console.log(`Failed to query ${order.side} order for asset $${order.asset} @ ${order.limit_price} from HotStuff Node ${port}`);
       });
   }
 }
@@ -59,10 +59,10 @@ async function main() {
       userID: userID
     }
 
-  let hashedOrder = createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex') + userID.toString('utf-8')
+  let hashedOrder = createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex') + userID.toString()
 
   // 1. append(order) —> to Hotstuff via REST
-  let ourIndex = await append(hashedOrder);
+  let ourIndex = await append(order, hashedOrder);
 
   var token;
 
@@ -85,20 +85,20 @@ async function main() {
   }
 
   // 3. ping s3 bucket, if order found call getIndex on order and check if hash is after yours
-  while (True){
-    var found = False;
+  while (true){
+    var found = false;
 
-    const data = s3.getObject(filledOrder, function(err, data) {
+    const data = await s3.getObject(filledOrder, async function(err, data) {
       if (err) {
         console.log(err, err.stack)
       }
       else {
         // 4. getIndex(other filled order) <- Hotstuff via rest
-        let filledIndex = await getIndex(hashedOrder + data.Body.toString('utf-8'))
+        let filledIndex = await getIndex(order, hashedOrder + data.Body.toString('utf-8'))
         if(ourIndex <= filledIndex){
           console.log("FRONTRUNNING OCCURRED, CALL GARY");
         }
-        found = True;
+        found = true;
       }
     })
 
