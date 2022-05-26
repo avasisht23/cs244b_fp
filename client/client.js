@@ -21,13 +21,13 @@ async function append(order, hashedOrder){
   for (const port of hotStuffPorts) {
     axios.post(`http://localhost:${port}`, hashedOrder)
       .then(function (response) {
-        console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limit_price} to HotStuff Node ${port}`);
+        console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${port}`);
         if(response.data.isLeader){
           return response.data.index;
         }
       })
       .catch(function (error) {
-        console.log(`Failed submission ${order.side} order for asset $${order.asset} @ ${order.limit_price} to HotStuff Node ${port}`);
+        console.log(`Failed submission ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${port}`);
       });
   }
 }
@@ -49,29 +49,29 @@ async function getIndex(order, hashedOrder){
   for (const port of hotStuffPorts) {
     axios.get(`http://localhost:${port}/index?order=${hashedOrder}`)
       .then(function (response) {
-        console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limit_price} from HotStuff Node ${port}`);
+        console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${port}`);
         if(response.data.isLeader){
           return response.data.index;
         }
       })
       .catch(function (error) {
-        console.log(`Failed to query ${order.side} order for asset $${order.asset} @ ${order.limit_price} from HotStuff Node ${port}`);
+        console.log(`Failed to query ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${port}`);
       });
   }
 }
 
 async function main() {
-  let [asset, limit_price, side] = process.argv.slice(2);
-  let userID = await getNewClientId();
+  let [asset, limitPrice, side] = process.argv.slice(2);
+  let clientId = await getNewClientId();
 
   let order = {
       asset: asset,
-      limit_price: limit_price,
+      limitPrice: limitPrice,
       side: side,
-      userID: userID
+      clientId: clientId
     }
 
-  let hashedOrder = createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex') + userID
+  let hashedOrder = createHash('sha256').update(`${asset}${limitPrice}${side}`).digest('hex') + clientId
 
   // 1. append(order) —> to Hotstuff via REST
   let ourIndex = await append(order, hashedOrder);
@@ -81,11 +81,11 @@ async function main() {
   // 2. submit order to darkpool
   axios.post(`http://localhost:${darkpoolPort}/sendOrder`, order)
     .then(function (response) {
-      console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limit_price}`);
+      console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limitPrice}`);
       token = response.data.token;
     })
     .catch(function (error) {
-      console.log(`Failed submission ${side} order for asset $${asset} @ ${limit_price}`);
+      console.log(`Failed submission ${side} order for asset $${asset} @ ${limitPrice}`);
       console.log(`error: ${error}`);
     });
 
