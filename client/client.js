@@ -12,63 +12,113 @@ const {
 
 aws.config.update({accessKeyId: ACCESS_KEY_ID, secretAccessKey: SECRET_KEY, region: REGION});
 
-const port = 8000
+const darkpoolPort = 800
+const hotStuffPorts = [0,0,0,0]
 const sleepCadence = 30000 // 30 seconds
+
+// Appends order to hotstuff ledger
+async function append(order, hashedOrder){
+  for (const port of hotStuffPorts) {
+    axios.post(`https://localhost:${port}`, hashedOrder)
+      .then(function (response) {
+        console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limit_price} to HotStuff Node ${port}`);
+        if(response.data.isLeader){
+          return response.data.index;
+        }
+      })
+      .catch(function (error) {
+        console.log(`Failed submission ${order.side} order for asset $${order.asset} @ ${order.limit_price} to HotStuff Node ${port}`);
+      });
+  }
+}
+
+// Get client id
+async function getNewClientId(){
+  axios.get(`https://localhost:${darkpoolPort}/getNewClientId`)
+    .then(function (response) {
+      console.log(`Successfully got new client id`);
+      return response.data.clientId.toString();
+    })
+    .catch(function (error) {
+      console.log(`Failed to get new client id`);
+    });
+}
+
+// Gets index of order in hotstuff ledger
+async function getIndex(order, hashedOrder){
+  for (const port of hotStuffPorts) {
+    axios.get(`https://localhost:${port}/index?order=${hashedOrder}`)
+      .then(function (response) {
+        console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limit_price} from HotStuff Node ${port}`);
+        if(response.data.isLeader){
+          return response.data.index;
+        }
+      })
+      .catch(function (error) {
+        console.log(`Failed to query ${order.side} order for asset $${order.asset} @ ${order.limit_price} from HotStuff Node ${port}`);
+      });
+  }
+}
 
 async function main() {
   let [asset, limit_price, side] = process.argv.slice(2);
+  let userID = await getNewClientId();
 
-  // 1. append(order) —> to Hotstuff via grpc
+  let order = {
+      asset: asset,
+      limit_price: limit_price,
+      side: side,
+      userID: userID
+    }
+
+  let hashedOrder = createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex') + userID
+
+  // 1. append(order) —> to Hotstuff via REST
+  let ourIndex = await append(order, hashedOrder);
+
+  var token;
 
   // 2. submit order to darkpool
-  axios.post(`http://localhost:${port}/sendOrder`, {
-      asset: asset,
-      limitPrice: limit_price,
-      side: side
-    })
+  axios.post(`https://localhost:${darkpoolPort}/sendOrder`, order)
     .then(function (response) {
       console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limit_price}`);
-      //@CHUD, make sure u store the value returned in the JSON response
-
+      token = response.data.token;
     })
     .catch(function (error) {
       console.log(`Failed submission ${side} order for asset $${asset} @ ${limit_price}`);
       console.log(`error: ${error}`);
     });
 
-    await new Promise(resolve => setTimeout(resolve, 3000)); //TEMPORARY UNTIL WE GET THE AWS STUFF SET UP
-
-
   var s3 = new aws.S3();
 
-  var params = {
+  var filledOrder = {
    Bucket: BUCKET,
-   Key: createHash('sha256').update(`${asset}${limit_price}${side}`).digest('hex')
+   Key: hashedOrder
   }
 
-  //@CHUD, commented this out since it was causing error since not connectied to AWS bucket yet. u can uncomment whenever
   // 3. ping s3 bucket, if order found call getIndex on order and check if hash is after yours
-  // while (true){
-  //   var found = false;
-  //
-  //   const data = s3.getObject(params, function(err, data) {
-  //     if (err) {
-  //       console.log(err, err.stack)
-  //     }
-  //     else {
-  //       // 4. getIndex(other filled order) <- Hotstuff via grpc
-  //       // if legal, "no frontrunning"
-  //       // else "sec"
-  //
-  //       found = true;
-  //     }
-  //   })
-  //
-  //   if (found) break;
-  //
-  //   // Sleep
-  //   await new Promise(resolve => setTimeout(resolve, sleepCadence));
-  //}
+  while (true){
+    var found = false;
+
+    const data = await s3.getObject(filledOrder, async function(err, data) {
+      if (err) {
+        console.log(err, err.stack)
+      }
+      else {
+        // 4. getIndex(other filled order) <- Hotstuff via rest
+        let filledIndex = await getIndex(order, hashedOrder + data.Body.toString('utf-8'))
+        if(ourIndex <= filledIndex){
+          console.log("FRONTRUNNING OCCURRED, CALL GARY");
+        }
+        found = true;
+      }
+    })
+
+    if (found) break;
+
+    // Sleep
+    await new Promise(resolve => setTimeout(resolve, sleepCadence));
+  }
 }
 
 // We recommend this pattern to be able to use async/await everywhere
