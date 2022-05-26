@@ -82,7 +82,7 @@ async function main() {
   axios.post(`http://localhost:${darkpoolPort}/sendOrder`, order)
     .then(function (response) {
       console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limitPrice}`);
-      token = response.data.token;
+      token = response.data.orderNumber;
     })
     .catch(function (error) {
       console.log(`Failed submission ${side} order for asset $${asset} @ ${limitPrice}`);
