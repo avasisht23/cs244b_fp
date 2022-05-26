@@ -19,12 +19,20 @@ app.get('/getState', (req, res) => { //get the state of the DP
     res.json({ bidsInPool: bidsQueue.toArray(), asksInPool: asksQueue.toArray()});
 });
 
+
+app.get('/getNewClientId', (req, res) => {
+    res.json({ clientId: lastClientId});
+    lastClientId += 1;
+});
+
 let currOrderNumber = 0;
 
 let bidsQueue = new MaxPriorityQueue((order) => order.limitPrice);
 let asksQueue = new MinPriorityQueue((order) => order.limitPrice);
 
 let fairnessCoefficient = 1;
+
+let lastClientId = 00000;
 
 //match when curr_bid >= curr_ask
 async function checkForMatches() {
