@@ -37,6 +37,7 @@ async function getNewClientId(){
   await axios.get(`http://localhost:${darkpoolPort}/getNewClientId`)
     .then(function (response) {
       console.log(`Successfully got new client id`);
+      console.log(response)
       return response.data.clientId;
     })
     .catch(function (error) {
