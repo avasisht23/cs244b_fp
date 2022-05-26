@@ -109,7 +109,7 @@ async function main() {
   while (true){
     var found = false;
 
-    const data = await s3.getItem(filledOrder, async function(err, data) {
+    const data = await ddb.getItem(filledOrder, async function(err, data) {
       if (err) {
         console.log(err, err.stack)
       }
