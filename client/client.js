@@ -34,17 +34,16 @@ async function append(order, hashedOrder){
 
 // Get client id
 async function getNewClientId(){
+  var r;
   await axios.get(`http://localhost:${darkpoolPort}/getNewClientId`)
     .then(function (response) {
       console.log(`Successfully got new client id`);
-      console.log(response)
-      console.log(response.data)
-      console.log(response.data.clientId)
-      return response.data.clientId;
+      r = response.data.clientId;
     })
     .catch(function (error) {
       console.log(`Failed to get new client id`);
     });
+  return r;
 }
 
 // Gets index of order in hotstuff ledger
