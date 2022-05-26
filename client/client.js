@@ -19,7 +19,7 @@ const sleepCadence = 30000 // 30 seconds
 // Appends order to hotstuff ledger
 async function append(order, hashedOrder){
   for (const port of hotStuffPorts) {
-    axios.post(`https://localhost:${port}`, hashedOrder)
+    axios.post(`http://localhost:${port}`, hashedOrder)
       .then(function (response) {
         console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limit_price} to HotStuff Node ${port}`);
         if(response.data.isLeader){
@@ -34,7 +34,7 @@ async function append(order, hashedOrder){
 
 // Get client id
 async function getNewClientId(){
-  axios.get(`https://localhost:${darkpoolPort}/getNewClientId`)
+  axios.get(`http://localhost:${darkpoolPort}/getNewClientId`)
     .then(function (response) {
       console.log(`Successfully got new client id`);
       return response.data.clientId.toString();
@@ -47,7 +47,7 @@ async function getNewClientId(){
 // Gets index of order in hotstuff ledger
 async function getIndex(order, hashedOrder){
   for (const port of hotStuffPorts) {
-    axios.get(`https://localhost:${port}/index?order=${hashedOrder}`)
+    axios.get(`http://localhost:${port}/index?order=${hashedOrder}`)
       .then(function (response) {
         console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limit_price} from HotStuff Node ${port}`);
         if(response.data.isLeader){
@@ -79,7 +79,7 @@ async function main() {
   var token;
 
   // 2. submit order to darkpool
-  axios.post(`https://localhost:${darkpoolPort}/sendOrder`, order)
+  axios.post(`http://localhost:${darkpoolPort}/sendOrder`, order)
     .then(function (response) {
       console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limit_price}`);
       token = response.data.token;
