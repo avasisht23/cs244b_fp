@@ -115,7 +115,7 @@ async function main() {
       }
       else {
         // 4. getIndex(other filled order) <- Hotstuff via rest
-        let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + data.Item.toString('utf-8'))
+        let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + data.Item)
         if(ourIndex < filledIndex){
           console.log("FRONTRUNNING OCCURRED, CALL GARY");
         }
