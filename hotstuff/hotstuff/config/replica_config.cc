@@ -27,18 +27,26 @@ ReplicaInfo::get_service_name(ReplicaService service) const
 	throw std::runtime_error("invalid service");
 }
 
+const char* 
+ReplicaInfo::get_data_dir() const
+{
+	return data_dir.c_str();
+}
+
 
 ReplicaInfo::ReplicaInfo(
     ReplicaID id, 
     PublicKey pk, 
     std::string hostname,
     std::string block_fetch_port,
-    std::string protocol_port)
+    std::string protocol_port,
+	std::string data_dir)
 	: hostname(hostname)
 	, block_fetch_port(block_fetch_port)
 	, protocol_port(protocol_port)
 	, id(id)
 	, pk(pk)
+	, data_dir(data_dir)
 	{}
 
 ReplicaConfig::ReplicaConfig()

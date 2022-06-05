@@ -1,6 +1,6 @@
 hotstuff/lmdb.o: hotstuff/lmdb.cc hotstuff/lmdb.h config.h \
   hotstuff/block.h hotstuff/config/replica_config.h hotstuff/xdr/types.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/types.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/array \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread.h \
@@ -179,9 +179,9 @@ hotstuff/lmdb.o: hotstuff/lmdb.cc hotstuff/lmdb.h config.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/vector \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bit_reference \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/endian.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/build_endian.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/socket.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/endian.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/build_endian.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/socket.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/system_error \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__errc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cerrno \
@@ -303,8 +303,8 @@ hotstuff/lmdb.o: hotstuff/lmdb.cc hotstuff/lmdb.h config.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__tree \
   hotstuff/hotstuff_debug_macros.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/marshal.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/message.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/marshal.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/message.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__locale \
@@ -346,7 +346,7 @@ hotstuff/config/replica_config.h:
 
 hotstuff/xdr/types.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/types.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/array:
 
@@ -704,11 +704,11 @@ hotstuff/xdr/types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/endian.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/endian.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/build_endian.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/build_endian.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/socket.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/socket.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/system_error:
 
@@ -952,9 +952,9 @@ hotstuff/xdr/hotstuff.h:
 
 hotstuff/hotstuff_debug_macros.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/marshal.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/marshal.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/message.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/message.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iostream:
 

@@ -6,6 +6,38 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+# Hotstuff
+test0
+data_dir_0
+aclocal.m4
+autom4te.cache/
+missing
+configure
+install-sh
+config.h.in
+config.h
+Makefile.in
+Makefile
+config.log
+config.status
+stamp-h1
+*.so
+build/
+*.o
+doc/
+*.deps
+*.dirstamp
+depcomp
+test
+test_runner.cc
+README
+databases/
+
+
+#mac
+.DS_STORE
+*~
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 

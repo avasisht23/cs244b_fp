@@ -38,6 +38,7 @@ class ReplicaInfo {
     std::string hostname;
     std::string block_fetch_port;
     std::string protocol_port;
+    std::string data_dir;
 
 public:
 
@@ -49,11 +50,14 @@ public:
         PublicKey pk, 
         std::string hostname,
         std::string block_fetch_port,
-        std::string protocol_port);
+        std::string protocol_port,
+        std::string data_dir);
 
     xdr::unique_sock tcp_connect(ReplicaService service) const;
 
     const char* get_service_name(ReplicaService service) const;
+
+    const char* get_data_dir() const;
 };
 
 class ReplicaConfig {

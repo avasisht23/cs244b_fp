@@ -170,8 +170,8 @@ hotstuff/vm/counting_vm.o: hotstuff/vm/counting_vm.cc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/vector \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bit_reference \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/marshal.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/endian.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/marshal.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/endian.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/string \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/string_view \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__string \
@@ -182,9 +182,9 @@ hotstuff/vm/counting_vm.o: hotstuff/vm/counting_vm.cc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_wctrans_t.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/build_endian.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/message.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/socket.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/build_endian.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/message.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/socket.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/system_error \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__errc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cerrno \
@@ -232,7 +232,7 @@ hotstuff/vm/counting_vm.o: hotstuff/vm/counting_vm.cc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/_types/_uuid_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/gethostuuid.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/uio.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/types.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__locale \
@@ -681,9 +681,9 @@ hotstuff/hotstuff_debug_macros.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/marshal.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/marshal.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/endian.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/endian.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/string:
 
@@ -705,11 +705,11 @@ hotstuff/hotstuff_debug_macros.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_types/_wctrans_t.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/build_endian.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/build_endian.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/message.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/message.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/socket.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/socket.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/system_error:
 
@@ -805,7 +805,7 @@ hotstuff/hotstuff_debug_macros.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/uio.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/types.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iostream:
 

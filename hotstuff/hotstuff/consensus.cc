@@ -14,7 +14,7 @@ HotstuffCore::HotstuffCore(const ReplicaConfig& config, ReplicaID self_id)
 	, self_id(self_id)
 	, config(config)
 	, b_leaf(genesis_block)
-	, decided_hash_index()
+	, decided_hash_index(config.get_info(self_id).get_data_dir())
 	{}
 
 //qc_block is the block pointed to by qc
@@ -62,7 +62,7 @@ HotstuffCore::update(const block_ptr_t& nblk) {
     if (blk1->get_height() > b_lock->get_height()) b_lock = blk1;
 
     //TODO threadpool or async worker to do writing in background
-    b_lock -> write_to_disk();
+    b_lock -> write_to_disk(config.get_info(self_id).get_data_dir());
 
     const auto blk = blk1->get_justify();
     if (blk == nullptr) return;

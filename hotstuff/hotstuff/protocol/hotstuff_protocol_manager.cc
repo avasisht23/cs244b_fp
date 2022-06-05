@@ -48,8 +48,10 @@ HotstuffProtocolManager::send_vote_to(block_ptr_t block, PartialCertificate cons
 {
 	if (target == self_id)
 	{
+		HSC_INFO("send_vote_to: target is self_id");
 		self_client.vote(block, pc);
 	} else {
+		HSC_INFO("send_vote_to: target is another replica %i", target);
 		auto v = std::make_shared<VoteMessage>();
 		v->vote = pc;
 		v->voter = self_id;

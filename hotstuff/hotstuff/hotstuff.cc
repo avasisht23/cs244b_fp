@@ -11,7 +11,7 @@ using xdr::operator==;
 
 HotstuffAppBase::HotstuffAppBase(const ReplicaConfig& config_, ReplicaID self_id, SecretKey sk)
 	: HotstuffCore(config_, self_id)
-	, block_store(get_genesis())
+	, block_store(get_genesis(), config.get_info(self_id).get_data_dir())
 	, block_fetch_manager(block_store, config)
 	, block_fetch_server(block_store, config.get_info(self_id))
 	, event_queue(*this)
@@ -31,6 +31,7 @@ void
 HotstuffAppBase::do_vote(block_ptr_t block, ReplicaID proposer) 
 {
 	PartialCertificate cert(block -> get_hash(), secret_key);
+	HSC_INFO("about to vote on proposal from %u at height %lu", proposer, block->get_height());
 
 	//forwards vote to 'proposer' (which is usually, but 
 	// doesn't have to be, the proposer of the block being voted on)
@@ -146,7 +147,7 @@ HotstuffAppBase::reload_decided_blocks() {
 		for (auto [_, hash] : cursor)
 		{
 			HOTSTUFF_INFO("LOADING: block hash %s", debug::hash_to_str(hash).c_str());
-			block_ptr_t blk = HotstuffBlock::load_decided_block(hash);
+			block_ptr_t blk = HotstuffBlock::load_decided_block(hash, config.get_info(self_id).get_data_dir());
 			auto res = block_store.insert_block(blk);
 			if (res) {
 				throw std::runtime_error("unable to properly load data into block store");

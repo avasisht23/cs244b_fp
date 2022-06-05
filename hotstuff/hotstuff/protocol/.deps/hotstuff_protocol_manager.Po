@@ -2,7 +2,7 @@ hotstuff/protocol/hotstuff_protocol_manager.o: \
   hotstuff/protocol/hotstuff_protocol_manager.cc \
   hotstuff/protocol/hotstuff_protocol_manager.h hotstuff/block.h \
   hotstuff/config/replica_config.h hotstuff/xdr/types.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/types.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/array \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread.h \
@@ -181,9 +181,9 @@ hotstuff/protocol/hotstuff_protocol_manager.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/vector \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bit_reference \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/endian.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/build_endian.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/socket.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/endian.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/build_endian.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/socket.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/system_error \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__errc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cerrno \
@@ -305,8 +305,8 @@ hotstuff/protocol/hotstuff_protocol_manager.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__tree \
   hotstuff/hotstuff_debug_macros.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/marshal.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/message.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/marshal.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/message.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iostream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__locale \
@@ -337,20 +337,20 @@ hotstuff/protocol/hotstuff_protocol_manager.o: \
   hotstuff/nonblocking_rpc_client.h utils/async_worker.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/condition_variable \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/thread \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/srpc.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/exception.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/rpc_msg.hh \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/server.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/printer.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/srpc.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/exception.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/rpc_msg.hh \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/server.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/printer.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/sstream \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/msgsock.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/msgsock.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/deque \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/pollset.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/pollset.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/csignal \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/signal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/poll.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/poll.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/rpcbind.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/rpcbind.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/variant \
   hotstuff/event_queue.h hotstuff/event.h hotstuff/generic_event_queue.h
 
@@ -362,7 +362,7 @@ hotstuff/config/replica_config.h:
 
 hotstuff/xdr/types.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/types.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/array:
 
@@ -720,11 +720,11 @@ hotstuff/xdr/types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/endian.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/endian.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/build_endian.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/build_endian.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/socket.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/socket.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/system_error:
 
@@ -968,9 +968,9 @@ hotstuff/xdr/hotstuff.h:
 
 hotstuff/hotstuff_debug_macros.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/marshal.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/marshal.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/message.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/message.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iostream:
 
@@ -1034,23 +1034,23 @@ utils/async_worker.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/thread:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/srpc.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/srpc.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/exception.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/exception.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/rpc_msg.hh:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/rpc_msg.hh:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/server.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/server.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/printer.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/printer.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/sstream:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/msgsock.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/msgsock.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/deque:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/pollset.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/pollset.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/csignal:
 
@@ -1060,7 +1060,7 @@ utils/async_worker.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/sys/poll.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/rpcbind.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/rpcbind.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/variant:
 

@@ -19,9 +19,12 @@ class HotstuffLMDB : private lmdb::LMDBInstance {
 
 	constexpr static auto DB_NAME = "hotstuff";
 
-	void open_env() {
+	void open_env(const char* data_dir) {
+		std::cout << "TEST" << std::endl;
+		std::cout << data_dir << std::endl;
 		LMDBInstance::open_env(
-			std::string(ROOT_DB_DIRECTORY) + std::string(HOTSTUFF_INDEX));
+			// std::string(ROOT_DB_DIRECTORY) + std::string(HOTSTUFF_INDEX));
+			std::string(data_dir) + std::string(HOTSTUFF_INDEX));
 	}
 
 	std::optional<std::pair<Hash, std::vector<uint8_t>>>
@@ -39,7 +42,9 @@ public:
 
 	using LMDBInstance::sync;
 
-	HotstuffLMDB() : LMDBInstance() { open_env(); }
+	HotstuffLMDB(const char* data_dir) : LMDBInstance(), data_directory(data_dir) { open_env(data_dir); }
+
+	std::string data_directory;
 
 	template<typename vm_block_id>
 	std::optional<std::pair<Hash, vm_block_id>>
@@ -118,7 +123,7 @@ public:
 	
 	template<typename vm_block_type>
 	vm_block_type
-	static load_vm_block(Hash const& hash);
+	load_vm_block(Hash const& hash) const;
 };
 
 template<typename vm_block_id>
@@ -157,9 +162,9 @@ HotstuffLMDB::cursor::iterator::get_hs_hash_and_vm_data() {
 
 template<typename vm_block_type>
 vm_block_type
-HotstuffLMDB::load_vm_block(Hash const& hash)
+HotstuffLMDB::load_vm_block(Hash const& hash) const
 {
-	auto unparsed_opt = load_block(hash);
+	auto unparsed_opt = load_block(hash, data_directory.c_str());
 	if (!unparsed_opt) {
 		throw std::runtime_error("failed to load expected block");
 	}

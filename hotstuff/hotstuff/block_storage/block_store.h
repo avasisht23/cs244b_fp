@@ -27,7 +27,7 @@ class BlockStore {
 
 public:
 
-	BlockStore(block_ptr_t genesis_block) 
+	BlockStore(block_ptr_t genesis_block, const char* data_dir) 
 		: block_cache()
 		, mtx()
 		, gc_collector()
@@ -35,11 +35,11 @@ public:
 			BlockContext blk;
 			blk.block = genesis_block;
 			block_cache[genesis_block->get_hash()] = blk;
-			make_block_folder();
+			make_block_folder(data_dir);
 		}
 
 	// Call before committing to any block (and executing it).
-	void write_to_disk(const Hash& block_hash);
+	void write_to_disk(const Hash& block_hash, const char* data_dir);
 
 	struct MissingDependencies {
 		std::optional<Hash> parent_hash;

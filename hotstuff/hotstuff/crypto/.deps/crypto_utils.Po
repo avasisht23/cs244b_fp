@@ -83,7 +83,7 @@ hotstuff/crypto/crypto_utils.o: hotstuff/crypto/crypto_utils.cc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/_ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/runetype.h \
   hotstuff/xdr/types.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/types.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/array \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/iterator \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__functional_base \
@@ -180,8 +180,8 @@ hotstuff/crypto/crypto_utils.o: hotstuff/crypto/crypto_utils.cc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/vector \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bit_reference \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/endian.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/build_endian.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/endian.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/build_endian.h \
   /usr/local/Cellar/libsodium/1.0.18_1/include/sodium.h \
   /usr/local/Cellar/libsodium/1.0.18_1/include/sodium/version.h \
   /usr/local/Cellar/libsodium/1.0.18_1/include/sodium/export.h \
@@ -438,7 +438,7 @@ hotstuff/crypto/crypto_utils.h:
 
 hotstuff/xdr/types.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/types.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/array:
 
@@ -632,9 +632,9 @@ hotstuff/xdr/types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/endian.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/endian.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/build_endian.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/build_endian.h:
 
 /usr/local/Cellar/libsodium/1.0.18_1/include/sodium.h:
 

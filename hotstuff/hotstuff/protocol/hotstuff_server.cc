@@ -8,9 +8,13 @@ namespace hotstuff {
 void
 HotstuffProtocolHandler::vote(std::unique_ptr<VoteMessage> v)
 {
+	HSC_INFO("vote");
 
 	if (!config.is_valid_replica(v->voter))
 		return;
+
+
+	HSC_INFO("vote config checked");
 
 	queue.validate_and_add_event(
 		NetEvent(

@@ -4339,9 +4339,6 @@ printf "%s\n" "@%:@define HOTSTUFF_BLOCKS \"$HOTSTUFF_BLOCKS\"" >>confdefs.h
 printf "%s\n" "@%:@define HOTSTUFF_INDEX \"$HOTSTUFF_INDEX\"" >>confdefs.h
 
 
-as_dir=$ROOT_DB_DIRECTORY$HOTSTUFF_BLOCKS; as_fn_mkdir_p
-as_dir=$ROOT_DB_DIRECTORY$HOTSTUFF_INDEX; as_fn_mkdir_p
-
 export CXXFLAGS
 
 

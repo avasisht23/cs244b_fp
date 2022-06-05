@@ -1,6 +1,6 @@
 hotstuff/block_storage/io_utils.o: hotstuff/block_storage/io_utils.cc \
   hotstuff/block_storage/io_utils.h hotstuff/xdr/hotstuff.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/types.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/array \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/pthread.h \
@@ -179,8 +179,8 @@ hotstuff/block_storage/io_utils.o: hotstuff/block_storage/io_utils.cc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/vector \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__bit_reference \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/endian.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/build_endian.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/endian.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/build_endian.h \
   hotstuff/xdr/types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/optional \
   hotstuff/hotstuff_debug_macros.h hotstuff/crypto/hash.h \
@@ -271,9 +271,9 @@ hotstuff/block_storage/io_utils.o: hotstuff/block_storage/io_utils.cc \
   /usr/local/Cellar/libsodium/1.0.18_1/include/sodium/crypto_pwhash_scryptsalsa208sha256.h \
   /usr/local/Cellar/libsodium/1.0.18_1/include/sodium/crypto_stream_salsa2012.h \
   /usr/local/Cellar/libsodium/1.0.18_1/include/sodium/crypto_stream_salsa208.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/marshal.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/message.h \
-  /Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/socket.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/marshal.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/message.h \
+  /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/socket.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/system_error \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__errc \
   /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/cerrno \
@@ -338,7 +338,7 @@ hotstuff/block_storage/io_utils.h:
 
 hotstuff/xdr/hotstuff.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/types.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/array:
 
@@ -696,9 +696,9 @@ hotstuff/xdr/hotstuff.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/__split_buffer:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/endian.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/endian.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/build_endian.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/build_endian.h:
 
 hotstuff/xdr/types.h:
 
@@ -882,11 +882,11 @@ hotstuff/crypto/hash.h:
 
 /usr/local/Cellar/libsodium/1.0.18_1/include/sodium/crypto_stream_salsa208.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/marshal.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/marshal.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/message.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/message.h:
 
-/Users/ajayvasisht/Desktop/hotstuff/xdrpp/xdrpp/socket.h:
+/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/xdrpp/xdrpp/socket.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/usr/include/c++/v1/system_error:
 

@@ -11,10 +11,11 @@
 
 namespace hotstuff {
 
-std::string storage_folder = std::string(ROOT_DB_DIRECTORY) + std::string(HOTSTUFF_BLOCKS);
+// std::string storage_folder = std::string(ROOT_DB_DIRECTORY) + std::string(HOTSTUFF_BLOCKS);
 
 void
-make_block_folder() {
+make_block_folder(const char* data_dir) {
+	std::string storage_folder = std::string(data_dir) + std::string(HOTSTUFF_BLOCKS);
 	utils::mkdir_safe(storage_folder.c_str());
 }
 
@@ -30,25 +31,26 @@ array_to_str(Hash const& hash) {
 }
 
 std::string
-block_filename(const HotstuffBlockWire& block)
+block_filename(const HotstuffBlockWire& block, const char* data_dir)
 {
 	auto const& header = block.header;
 
 	auto header_hash = hash_xdr(header);
 
-	return block_filename(header_hash);
+	return block_filename(header_hash, data_dir);
 }
 
 std::string
-block_filename(const Hash& header_hash)
+block_filename(const Hash& header_hash, const char* data_dir)
 {
 	auto strname = array_to_str(header_hash);
+	std::string storage_folder = std::string(data_dir) + std::string(HOTSTUFF_BLOCKS);
 
 	return storage_folder + strname + std::string(".block");
 }
 
-void save_block(const HotstuffBlockWire& block) {
-	auto filename = block_filename(block);
+void save_block(const HotstuffBlockWire& block, const char* data_dir) {
+	auto filename = block_filename(block, data_dir);
 
 	if (utils::save_xdr_to_file(block, filename.c_str()))
 	{
@@ -57,9 +59,9 @@ void save_block(const HotstuffBlockWire& block) {
 }
 
 std::optional<HotstuffBlockWire> 
-load_block(const Hash& req_header_hash)
+load_block(const Hash& req_header_hash, const char* data_dir)
 {
-	auto filename = block_filename(req_header_hash);
+	auto filename = block_filename(req_header_hash, data_dir);
 
 	HotstuffBlockWire block;
 	if (utils::load_xdr_from_file(block, filename.c_str()))

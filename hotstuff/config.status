@@ -430,7 +430,7 @@ Copyright (C) 2021 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/Users/ajayvasisht/Desktop/hotstuff'
+ac_pwd='/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff'
 srcdir='.'
 INSTALL='/usr/local/bin/ginstall -c'
 MKDIR_P='/usr/local/bin/gmkdir -p'
@@ -662,12 +662,12 @@ S["mkdir_p"]="$(MKDIR_P)"
 S["MKDIR_P"]="/usr/local/bin/gmkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]=""
-S["install_sh"]="${SHELL} /Users/ajayvasisht/Desktop/hotstuff/install-sh"
-S["MAKEINFO"]="${SHELL} '/Users/ajayvasisht/Desktop/hotstuff/missing' makeinfo"
-S["AUTOHEADER"]="${SHELL} '/Users/ajayvasisht/Desktop/hotstuff/missing' autoheader"
-S["AUTOMAKE"]="${SHELL} '/Users/ajayvasisht/Desktop/hotstuff/missing' automake-1.16"
-S["AUTOCONF"]="${SHELL} '/Users/ajayvasisht/Desktop/hotstuff/missing' autoconf"
-S["ACLOCAL"]="${SHELL} '/Users/ajayvasisht/Desktop/hotstuff/missing' aclocal-1.16"
+S["install_sh"]="${SHELL} /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/install-sh"
+S["MAKEINFO"]="${SHELL} '/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/missing' makeinfo"
+S["AUTOHEADER"]="${SHELL} '/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/missing' autoheader"
+S["AUTOMAKE"]="${SHELL} '/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/missing' automake-1.16"
+S["AUTOCONF"]="${SHELL} '/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/missing' autoconf"
+S["ACLOCAL"]="${SHELL} '/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/missing' aclocal-1.16"
 S["VERSION"]="0"
 S["PACKAGE"]="hotstuff"
 S["CYGPATH_W"]="echo"

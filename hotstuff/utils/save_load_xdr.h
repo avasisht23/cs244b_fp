@@ -246,6 +246,7 @@ mkdir_safe(const char* dirname) {
 	constexpr static auto mkdir_perms = S_IRWXU | S_IRWXG | S_IRWXO;
 
 	auto res = mkdir(dirname, mkdir_perms);
+	std::cout << dirname << std::endl;
 	if (res == 0) {
 		return false;
 	}

@@ -96,9 +96,12 @@ void NetworkEventQueue::on_event(NetEvent& event)
 void 
 NetworkEventQueue::validate_and_add_event(NetEvent const& e)
 {
+	HSC_INFO("in validate");
 	if (e.validate(config))
 	{
+		HSC_INFO("config validated");
 		add_event_(e);
+		HSC_INFO("event added");
 	}
 }
 
