@@ -98,9 +98,7 @@ async function main() {
 
   // 3. ping s3 bucket, if order found call getIndex on order and check if hash is after yours
   while (true){
-    var found = false;
-
-    const data = await ddb.getItem(filledOrder, async function(err, data) {
+    const found = await ddb.getItem(filledOrder, async function(err, data) {
       if (err) {
         console.log(err, err.stack)
       }
@@ -112,8 +110,9 @@ async function main() {
         if(ourIndex < filledIndex){
           console.log("FRONTRUNNING OCCURRED, CALL GARY");
         }
-        found = true;
+        return true;
       }
+      return false;
     })
 
     if (found) break;
