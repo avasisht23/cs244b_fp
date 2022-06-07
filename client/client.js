@@ -107,7 +107,7 @@ async function main() {
         // 4. getIndex(other filled order) <- Hotstuff via rest
         var port = [80,81,83]
         for(let i = 0; i < 3; i++){
-          console.log(`getIndex on port ${i} is: ${await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S, i)}`);
+          console.log(`getIndex on port ${i} is: ${await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S, port[i])}`);
         }
 
         // 5. getIndex(our order) <- Hotstuff via rest
