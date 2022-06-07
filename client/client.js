@@ -15,6 +15,10 @@ aws.config.update({accessKeyId: ACCESS_KEY_ID, secretAccessKey: SECRET_KEY, regi
 const darkpoolPort = 8000
 const hotStuffPort = 80 // 0th replica is leader. No rotation
 const sleepCadence = 30000 // 30 seconds
+const sideD = {
+  "BID": "ASK",
+  "ASK": "BID"
+}
 
 // Appends order to hotstuff ledger
 async function append(order, hashedOrder){
@@ -72,6 +76,7 @@ async function main() {
     }
 
   let hashedOrder = createHash('sha256').update(`${asset}${limitPrice}${side}`).digest('hex') + "," + clientId.toString()
+  let hashedOrder2 = createHash('sha256').update(`${asset}${limitPrice}${sideD[side]}`).digest('hex')
 
   // 1. append(order) —> to Hotstuff via REST
   let ourIndex = await append(order, hashedOrder);
@@ -98,6 +103,13 @@ async function main() {
    }
   }
 
+  var filledOrder2 = {
+   TableName: TABLE_NAME,
+   Key: {
+    'hash': {S: hashedOrder2}
+   }
+  }
+
   // 3. ping s3 bucket, if order found call getIndex on order and check if hash is after yours
   while (true){
     // TYPE 1 FRONTRUNNING: Another Client gets ahead of another in fill
@@ -109,7 +121,6 @@ async function main() {
         // 4. getIndex(other filled order) <- Hotstuff via rest
         let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S)
         console.log(filledIndex)
-        console.log(ourIndex)
         if(ourIndex < filledIndex){
           console.log("FRONTRUNNING OCCURRED, CALL GARY");
         }
@@ -117,6 +128,23 @@ async function main() {
     })
 
     if (res1.response.data) break;
+
+    // TYPE 2 FRONTRUNNING: Darkpool fills ahead of another in fill
+    const res2 = await ddb.getItem(filledOrder2, async function(err, data) {
+      if (err) {
+        console.log(err, err.stack)
+      }
+      else if (Object.keys(data).length !== 0){
+        // 4. getIndex(other filled order) <- Hotstuff via rest
+        let filledIndex = await getIndex(order, hashedOrder2 + "," + data.Item.clientId.S)
+        console.log(filledIndex)
+        if(filledIndex == -1){
+          console.log("FRONTRUNNING OCCURRED, CALL GARY");
+        }
+      }
+    })
+
+    if (res2.response.data) break;
 
     // Sleep
     await new Promise(resolve => setTimeout(resolve, sleepCadence));
