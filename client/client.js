@@ -13,7 +13,7 @@ const {
 aws.config.update({accessKeyId: ACCESS_KEY_ID, secretAccessKey: SECRET_KEY, region: REGION});
 
 const darkpoolPort = 8000
-const hotStuffPort = 9000 // 0th replica is leader. No rotation
+const hotStuffPort = 80 // 0th replica is leader. No rotation
 const sleepCadence = 30000 // 30 seconds
 
 // Appends order to hotstuff ledger
@@ -105,8 +105,10 @@ async function main() {
         console.log(err, err.stack)
       }
       else if (Object.keys(data).length !== 0){
+        console.log(data)
         // 4. getIndex(other filled order) <- Hotstuff via rest
-        let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + data.Item.clientId.S)
+        let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S)
+        console.log(filledIndex)
         if(ourIndex < filledIndex){
           console.log("FRONTRUNNING OCCURRED, CALL GARY");
         }
