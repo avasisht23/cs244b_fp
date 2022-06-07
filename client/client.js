@@ -45,15 +45,15 @@ async function getNewClientId(){
 }
 
 // Gets index of order in hotstuff ledger
-async function getIndex(order, hashedOrder){
+async function getIndex(order, hashedOrder, port){
   var r;
-  await axios.get(`http://localhost:${hotStuffPort}/get_index?hash=${hashedOrder}`)
+  await axios.get(`http://localhost:${port}/get_index?hash=${hashedOrder}`)
     .then(function (response) {
-      console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${hotStuffPort}`);
+      console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${port}`);
       r = response.data;
     })
     .catch(function (error) {
-      console.log(`Failed to query ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${hotStuffPort}`);
+      console.log(`Failed to query ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${port}`);
     });
   return r;
 }
@@ -105,7 +105,13 @@ async function main() {
       }
       else if (Object.keys(data).length !== 0){
         // 4. getIndex(other filled order) <- Hotstuff via rest
-        let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S)
+        let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S, )
+        
+        var port = [80,81,83]
+        for(let i = 0; i < 3; i++){
+          console.log(`getIndex on port ${i} is: ${await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S, i)}`);
+        }
+
         // 5. getIndex(our order) <- Hotstuff via rest
         let ourIndex = await getIndex(order, hashedOrder.split(",")[0] + "," + clientId)
         // Was fake order created by darkpool (never appended)
