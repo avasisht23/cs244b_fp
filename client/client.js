@@ -22,7 +22,6 @@ async function append(order, hashedOrder){
   await axios.post(`http://localhost:${hotStuffPort}/append`, {order: hashedOrder})
     .then(function (response) {
       console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${hotStuffPort}`);
-      console.log(response.data)
       r = response.data;
     })
     .catch(function (error) {
@@ -51,7 +50,6 @@ async function getIndex(order, hashedOrder){
   await axios.get(`http://localhost:${hotStuffPort}/get_index?hash=${hashedOrder}`)
     .then(function (response) {
       console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${hotStuffPort}`);
-      console.log(response.data)
       r = response.data;
     })
     .catch(function (error) {
@@ -74,7 +72,7 @@ async function main() {
   let hashedOrder = createHash('sha256').update(`${asset}${limitPrice}${side}`).digest('hex') + "," + clientId.toString()
 
   // 1. append(order) —> to Hotstuff via REST
-  let ourIndex = await append(order, hashedOrder);
+  await append(order, hashedOrder);
 
   var token;
 
@@ -108,8 +106,6 @@ async function main() {
       else if (Object.keys(data).length !== 0){
         // 4. getIndex(other filled order) <- Hotstuff via rest
         let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S)
-        console.log(filledIndex)
-        console.log(ourIndex)
         // Was fake order created by darkpool (never appended)
         if(filledIndex == -1){
           console.log("FRONTRUNNING OCCURRED, CALL GARY");
