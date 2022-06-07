@@ -106,8 +106,10 @@ async function main() {
       else if (Object.keys(data).length !== 0){
         // 4. getIndex(other filled order) <- Hotstuff via rest
         let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S)
+        // 5. getIndex(our order) <- Hotstuff via rest
+        let ourIndex = await getIndex(order, hashedOrder.split(",")[0] + "," + clientId)
         // Was fake order created by darkpool (never appended)
-        if(filledIndex == -1){
+        if(filledIndex == -1 || ourIndex < filledIndex){
           console.log("FRONTRUNNING OCCURRED, CALL GARY");
         }
       }
