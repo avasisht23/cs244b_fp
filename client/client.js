@@ -105,8 +105,6 @@ async function main() {
       }
       else if (Object.keys(data).length !== 0){
         // 4. getIndex(other filled order) <- Hotstuff via rest
-        let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S, )
-        
         var port = [80,81,83]
         for(let i = 0; i < 3; i++){
           console.log(`getIndex on port ${i} is: ${await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S, i)}`);
