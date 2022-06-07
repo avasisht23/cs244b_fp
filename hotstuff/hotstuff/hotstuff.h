@@ -191,6 +191,7 @@ public:
 	{
 		vm_bridge.add_proposal(std::move(proposal));
 	}
+
 };
 
 

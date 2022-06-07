@@ -32,6 +32,10 @@ void
 CountingVM::exec_block(const block_type& blk) {
 	// curate a log of previous requests
 	// send back the blk_id through a post request
+	HOTSTUFF_INFO("VM: applied update");
+	printf("HELLO HELLO");
+	// std::unique_ptr<block_type> a = blk.try_vm_parse();
+	state ++;
 }
 
 void 

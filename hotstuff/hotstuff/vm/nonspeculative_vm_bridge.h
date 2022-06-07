@@ -53,6 +53,7 @@ class NonspeculativeVMBridge {
 	//! (in which case, this returns a default, null_id value).
 	vm_block_id get_block_id(std::unique_ptr<vm_block_type> const& blk) {
 		if (blk) {
+			HOTSTUFF_INFO("get_block_id");
 			return VMType::nonempty_block_id(*blk);
 		}
 		return VMType::empty_block_id();

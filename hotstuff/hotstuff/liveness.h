@@ -58,12 +58,14 @@ public:
         , proposer(hotstuff_app.get_last_proposer()) // get genesis proposer
         {}
 
-    void wait_for_qc() {
-        auto res = hotstuff_app.wait_for_new_qc(expected_hash);
+    bool wait_for_qc() {
+        bool res = hotstuff_app.wait_for_new_qc(expected_hash);
 
         if (!res) {
             proposer = hotstuff_app.get_last_proposer();
         }
+
+        return res;
     }
 
     bool should_propose() {

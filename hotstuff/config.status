@@ -430,11 +430,11 @@ Copyright (C) 2021 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/Users/eugeniafriedlander/Desktop/class/spring-2022/cs244b/cs244b_fp/hotstuff'
+ac_pwd='/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff'
 srcdir='.'
-INSTALL='/usr/bin/install -c'
-MKDIR_P='./install-sh -c -d'
-AWK='awk'
+INSTALL='/usr/local/bin/ginstall -c'
+MKDIR_P='/usr/local/bin/gmkdir -p'
+AWK='gawk'
 test -n "$AWK" || AWK=awk
 # The default lists apply if the user does not specify any file.
 ac_need_defaults=:
@@ -618,8 +618,8 @@ S["XDRPP_INTERNAL_TRUE"]=""
 S["subdirs"]=" xdrpp"
 S["xdrpp_CFLAGS"]="-isystem $(abs_top_srcdir)/xdrpp -isystem $(abs_top_builddir)/xdrpp"
 S["xdrpp_LIBS"]="$(abs_top_builddir)/xdrpp/xdrpp/libxdrpp.a"
-S["Catch2_LIBS"]="-L/usr/local/Cellar/catch2/3.0.1/lib -lCatch2"
-S["Catch2_CFLAGS"]="-I/usr/local/Cellar/catch2/3.0.1/include"
+S["Catch2_LIBS"]=""
+S["Catch2_CFLAGS"]="-I/usr/local/Cellar/catch2/2.13.9/include"
 S["tbb_LIBS"]="-L/usr/local/Cellar/tbb/2021.5.0_1/lib -ltbb"
 S["tbb_CFLAGS"]="-I/usr/local/Cellar/tbb/2021.5.0_1/include"
 S["lmdb_LIBS"]="-L/usr/local/Cellar/lmdb/0.9.29/lib -llmdb"
@@ -657,17 +657,17 @@ S["am__tar"]="$${TAR-tar} chof - \"$$tardir\""
 S["AMTAR"]="$${TAR-tar}"
 S["am__leading_dot"]="."
 S["SET_MAKE"]=""
-S["AWK"]="awk"
+S["AWK"]="gawk"
 S["mkdir_p"]="$(MKDIR_P)"
-S["MKDIR_P"]="./install-sh -c -d"
+S["MKDIR_P"]="/usr/local/bin/gmkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]=""
-S["install_sh"]="${SHELL} /Users/eugeniafriedlander/Desktop/class/spring-2022/cs244b/cs244b_fp/hotstuff/install-sh"
-S["MAKEINFO"]="${SHELL} '/Users/eugeniafriedlander/Desktop/class/spring-2022/cs244b/cs244b_fp/hotstuff/missing' makeinfo"
-S["AUTOHEADER"]="${SHELL} '/Users/eugeniafriedlander/Desktop/class/spring-2022/cs244b/cs244b_fp/hotstuff/missing' autoheader"
-S["AUTOMAKE"]="${SHELL} '/Users/eugeniafriedlander/Desktop/class/spring-2022/cs244b/cs244b_fp/hotstuff/missing' automake-1.16"
-S["AUTOCONF"]="${SHELL} '/Users/eugeniafriedlander/Desktop/class/spring-2022/cs244b/cs244b_fp/hotstuff/missing' autoconf"
-S["ACLOCAL"]="${SHELL} '/Users/eugeniafriedlander/Desktop/class/spring-2022/cs244b/cs244b_fp/hotstuff/missing' aclocal-1.16"
+S["install_sh"]="${SHELL} /Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/install-sh"
+S["MAKEINFO"]="${SHELL} '/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/missing' makeinfo"
+S["AUTOHEADER"]="${SHELL} '/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/missing' autoheader"
+S["AUTOMAKE"]="${SHELL} '/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/missing' automake-1.16"
+S["AUTOCONF"]="${SHELL} '/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/missing' autoconf"
+S["ACLOCAL"]="${SHELL} '/Users/ajayvasisht/Desktop/cs244b_fp/hotstuff/missing' aclocal-1.16"
 S["VERSION"]="0"
 S["PACKAGE"]="hotstuff"
 S["CYGPATH_W"]="echo"
