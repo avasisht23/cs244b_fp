@@ -55,6 +55,7 @@ protected:
 public:
 
 	HotstuffAppBase(const ReplicaConfig& config_, ReplicaID self_id, SecretKey sk);
+	HotstuffAppBase();
 
 	//! Propose new block.
 	//! Block hash returned (for input to wait_for_new_qc)
@@ -102,6 +103,19 @@ public:
 		, vm_bridge(vm)
 		{}
 
+	HotstuffApp(std::shared_ptr<VMType> vm) : HotstuffAppBase(), vm_bridge(vm) {};
+
+/*
+	HotstuffApp operator =(const HotstuffApp &h1, const HotstuffApp &h2)
+	{
+		hotstuffapp h2;
+
+		h1.var1 = h2.var1
+		h1.var2 = h2.var2
+			......
+		h1.varn = h2.varn
+	}
+*/
 	void init_clean() {
 		decided_hash_index.create_db();
 		vm_bridge.init_clean();

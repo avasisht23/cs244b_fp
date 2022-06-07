@@ -9,7 +9,7 @@ CountingVMBlockID::CountingVMBlockID(std::vector<uint8_t> const& bytes)
 	: value(std::nullopt)
 {
 	if (bytes.size() > 0) {
-		value = std::make_optional<uint64_t>();
+		value = std::make_optional<xdr::opaque_vec<>>();
 		xdr::xdr_from_opaque(bytes, *value);
 	}
 }
@@ -30,18 +30,13 @@ CountingVM::init_from_disk(HotstuffLMDB const& lmdb) {
 
 void 
 CountingVM::exec_block(const block_type& blk) {
-	if (blk == state + 1) {
-		state ++;
-		HOTSTUFF_INFO("VM: applied update, now at %lu", state);
-	} else {
-		HOTSTUFF_INFO("VM: got invalid input state, no op");
-	}
+	// curate a log of previous requests
+	// send back the blk_id through a post request
 }
 
 void 
 CountingVM::log_commitment(const block_id& id) {
 	if (id.value) {
-		last_committed_state = *(id.value);
 		HOTSTUFF_INFO("VM: confirmed up to %lu", last_committed_state);
 	}
 }

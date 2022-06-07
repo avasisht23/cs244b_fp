@@ -1168,38 +1168,38 @@ m4trace:configure.ac:23: -1- PKG_CHECK_EXISTS([Catch2], [pkg_cv_[]Catch2_CFLAGS=
 m4trace:configure.ac:23: -1- PKG_CHECK_EXISTS([Catch2], [pkg_cv_[]Catch2_LIBS=`$PKG_CONFIG --[]libs "Catch2" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
 m4trace:configure.ac:23: -1- _PKG_SHORT_ERRORS_SUPPORTED
-m4trace:configure.ac:28: -1- m4_pattern_allow([^ROOT_DB_DIRECTORY$])
-m4trace:configure.ac:29: -1- m4_pattern_allow([^HOTSTUFF_BLOCKS$])
-m4trace:configure.ac:30: -1- m4_pattern_allow([^HOTSTUFF_INDEX$])
-m4trace:configure.ac:34: -1- AX_PKGCONFIG_SUBDIR([xdrpp])
-m4trace:configure.ac:34: -1- m4_pattern_allow([^xdrpp_LIBS$])
-m4trace:configure.ac:34: -1- m4_pattern_allow([^xdrpp_CFLAGS$])
-m4trace:configure.ac:34: -1- m4_pattern_allow([^subdirs$])
-m4trace:configure.ac:34: -1- PKG_CHECK_MODULES([xdrpp], [xdrpp])
-m4trace:configure.ac:34: -1- m4_pattern_allow([^xdrpp_CFLAGS$])
-m4trace:configure.ac:34: -1- m4_pattern_allow([^xdrpp_LIBS$])
-m4trace:configure.ac:34: -1- PKG_CHECK_EXISTS([xdrpp], [pkg_cv_[]xdrpp_CFLAGS=`$PKG_CONFIG --[]cflags "xdrpp" 2>/dev/null`
+m4trace:configure.ac:30: -1- m4_pattern_allow([^ROOT_DB_DIRECTORY$])
+m4trace:configure.ac:31: -1- m4_pattern_allow([^HOTSTUFF_BLOCKS$])
+m4trace:configure.ac:32: -1- m4_pattern_allow([^HOTSTUFF_INDEX$])
+m4trace:configure.ac:36: -1- AX_PKGCONFIG_SUBDIR([xdrpp])
+m4trace:configure.ac:36: -1- m4_pattern_allow([^xdrpp_LIBS$])
+m4trace:configure.ac:36: -1- m4_pattern_allow([^xdrpp_CFLAGS$])
+m4trace:configure.ac:36: -1- m4_pattern_allow([^subdirs$])
+m4trace:configure.ac:36: -1- PKG_CHECK_MODULES([xdrpp], [xdrpp])
+m4trace:configure.ac:36: -1- m4_pattern_allow([^xdrpp_CFLAGS$])
+m4trace:configure.ac:36: -1- m4_pattern_allow([^xdrpp_LIBS$])
+m4trace:configure.ac:36: -1- PKG_CHECK_EXISTS([xdrpp], [pkg_cv_[]xdrpp_CFLAGS=`$PKG_CONFIG --[]cflags "xdrpp" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:34: -1- PKG_CHECK_EXISTS([xdrpp], [pkg_cv_[]xdrpp_LIBS=`$PKG_CONFIG --[]libs "xdrpp" 2>/dev/null`
+m4trace:configure.ac:36: -1- PKG_CHECK_EXISTS([xdrpp], [pkg_cv_[]xdrpp_LIBS=`$PKG_CONFIG --[]libs "xdrpp" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes ], [pkg_failed=yes])
-m4trace:configure.ac:34: -1- _PKG_SHORT_ERRORS_SUPPORTED
-m4trace:configure.ac:34: -1- AM_CONDITIONAL([XDRPP_INTERNAL], [test -n "$pcname[]_INTERNAL"])
-m4trace:configure.ac:34: -1- m4_pattern_allow([^XDRPP_INTERNAL_TRUE$])
-m4trace:configure.ac:34: -1- m4_pattern_allow([^XDRPP_INTERNAL_FALSE$])
-m4trace:configure.ac:34: -1- _AM_SUBST_NOTMAKE([XDRPP_INTERNAL_TRUE])
-m4trace:configure.ac:34: -1- _AM_SUBST_NOTMAKE([XDRPP_INTERNAL_FALSE])
-m4trace:configure.ac:34: -1- m4_pattern_allow([^PKGCONFIG_SUBDIRS$])
-m4trace:configure.ac:36: -1- m4_pattern_allow([^XDRC$])
-m4trace:configure.ac:44: -1- m4_pattern_allow([^XDRC$])
-m4trace:configure.ac:48: -1- m4_pattern_allow([^LIB@&t@OBJS$])
-m4trace:configure.ac:48: -1- m4_pattern_allow([^LTLIBOBJS$])
-m4trace:configure.ac:48: -1- AM_CONDITIONAL([am__EXEEXT], [test -n "$EXEEXT"])
-m4trace:configure.ac:48: -1- m4_pattern_allow([^am__EXEEXT_TRUE$])
-m4trace:configure.ac:48: -1- m4_pattern_allow([^am__EXEEXT_FALSE$])
-m4trace:configure.ac:48: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_TRUE])
-m4trace:configure.ac:48: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_FALSE])
-m4trace:configure.ac:48: -1- _AC_AM_CONFIG_HEADER_HOOK(["$ac_file"])
-m4trace:configure.ac:48: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS
-m4trace:configure.ac:48: -1- AM_RUN_LOG([cd "$am_dirpart" \
+m4trace:configure.ac:36: -1- _PKG_SHORT_ERRORS_SUPPORTED
+m4trace:configure.ac:36: -1- AM_CONDITIONAL([XDRPP_INTERNAL], [test -n "$pcname[]_INTERNAL"])
+m4trace:configure.ac:36: -1- m4_pattern_allow([^XDRPP_INTERNAL_TRUE$])
+m4trace:configure.ac:36: -1- m4_pattern_allow([^XDRPP_INTERNAL_FALSE$])
+m4trace:configure.ac:36: -1- _AM_SUBST_NOTMAKE([XDRPP_INTERNAL_TRUE])
+m4trace:configure.ac:36: -1- _AM_SUBST_NOTMAKE([XDRPP_INTERNAL_FALSE])
+m4trace:configure.ac:36: -1- m4_pattern_allow([^PKGCONFIG_SUBDIRS$])
+m4trace:configure.ac:38: -1- m4_pattern_allow([^XDRC$])
+m4trace:configure.ac:46: -1- m4_pattern_allow([^XDRC$])
+m4trace:configure.ac:50: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+m4trace:configure.ac:50: -1- m4_pattern_allow([^LTLIBOBJS$])
+m4trace:configure.ac:50: -1- AM_CONDITIONAL([am__EXEEXT], [test -n "$EXEEXT"])
+m4trace:configure.ac:50: -1- m4_pattern_allow([^am__EXEEXT_TRUE$])
+m4trace:configure.ac:50: -1- m4_pattern_allow([^am__EXEEXT_FALSE$])
+m4trace:configure.ac:50: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_TRUE])
+m4trace:configure.ac:50: -1- _AM_SUBST_NOTMAKE([am__EXEEXT_FALSE])
+m4trace:configure.ac:50: -1- _AC_AM_CONFIG_HEADER_HOOK(["$ac_file"])
+m4trace:configure.ac:50: -1- _AM_OUTPUT_DEPENDENCY_COMMANDS
+m4trace:configure.ac:50: -1- AM_RUN_LOG([cd "$am_dirpart" \
       && sed -e '/# am--include-marker/d' "$am_filepart" \
         | $MAKE -f - am--depfiles])

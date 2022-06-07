@@ -1,5 +1,7 @@
 // #include <catch2/catch_session.hpp>
 #include <iostream>
+#include <memory>
+#include <cstdlib>
 
 #include "hotstuff/vm/counting_vm.h"
 
@@ -9,19 +11,69 @@
 
 #include "hotstuff/liveness.h"
 
+#include <restbed>
+
+using namespace std;
 using namespace hotstuff;
+using namespace restbed;
+
+// use global variables to pass to handlers
+std::string replica_id;
+auto vm = std::make_shared<CountingVM>();;
+NonspeculativeHotstuffApp<CountingVM>* app;
+
+
+void get_method_handler( const shared_ptr< Session > session )
+{
+	const auto request = session->get_request( );
+
+    int content_length = request->get_header( "Content-Length", 0 );
+
+    session->fetch( content_length, [ ]( const shared_ptr< Session > session, const Bytes & body )
+    {
+		// getIndex...
+		session->close( OK, "Hello, World!", { { "Content-Length", "13" } } );
+	});
+}
+
+void post_method_handler( const shared_ptr< Session > session )
+{
+    const auto request = session->get_request( );
+
+    int content_length = request->get_header( "Content-Length", 0 );
+
+    session->fetch( content_length, [ ]( const shared_ptr< Session > session, const Bytes & body )
+    {
+        fprintf( stdout, "%.*s\n", ( int ) body.size( ), body.data( ) );
+		if (stoi(replica_id) == 0) {
+			PaceMakerWaitQC pmaker(*app);
+			pmaker.set_self_as_proposer();
+			auto proposal = xdr::opaque_vec<>(body.data(), body.data()+body.size());
+			app->add_proposal(std::move(proposal));
+			pmaker.do_propose();
+			pmaker.wait_for_qc();
+
+			std::cout << (vm->get_last_committed_height() == 0);
+		}
+		else {
+			
+		}
+        session->close( OK, "Hello, World!", { { "Content-Length", "13" } } );
+    } );
+}
+
 
 int main(int argc, char** argv)
 {
-	// int result = Catch::Session().run(argc, argv);
+	// BEGIN SETUP HOTSTUFF
 	std::cout << "test";
 
 	if (argc != 2) {
-		std::cout << "not enough arguments to instantiate replica";
+		std::cout << "Not enough arguments to instantiate replica";
 		return 1;
 	}
 
-	std::string replica_id(argv[1]);
+	replica_id = argv[1];
 	std::string data_dir = "data_dir_" + replica_id;
 	std::cout << replica_id << std::endl;
 	std::cout << data_dir << std::endl;
@@ -46,7 +98,7 @@ int main(int argc, char** argv)
 
 	config.finish_init();
 
-	auto vm = std::make_shared<CountingVM>();
+	
 
 	std::map<ReplicaID, SecretKey> m { 
 		{0, sk1}, 
@@ -57,39 +109,31 @@ int main(int argc, char** argv)
 
 	// HotstuffApp app(config, r1.id, sk1, vm);
 	
-	HotstuffApp app(config, stoi(replica_id), m[stoi(replica_id)], vm);
-	app.init_clean();
+	app = new NonspeculativeHotstuffApp(config, stoi(replica_id), m[stoi(replica_id)], vm);
 
-	if (stoi(replica_id) == 0) {
-		PaceMakerWaitQC pmaker(app);
-		pmaker.set_self_as_proposer();
-		app.put_vm_in_proposer_mode();
+	app->init_clean();
 
-		std::cout << "5 proposes";
-		{
-			for (size_t i = 0; i < 5; i++)
-			{
-				pmaker.do_propose();
-				pmaker.wait_for_qc();
-			}
 
-			std::cout << (vm->get_last_committed_height() == 0);
-			// this test case will break if we change how many proposals
-			// are buffered within the vm bridge.
-			// Right now 3 -- so vm runs 3 ahead of proposed value,
-			// which is 2 ahead of last committed.
-			std::cout << (vm->get_speculative_height() == 5);
-		}
+	// END SETUP HOTSTUFF
 
-		while(true) {
 
-		}
-	}
-	else {
-		while(true) {
+	// BEING SETUP REST HANDLERS
 
-		}
-	}
+    auto resource = make_shared< Resource >( );
+    resource->set_path( "/resource" );
+    resource->set_method_handler( "POST", post_method_handler );
+	resource->set_method_handler( "GET", get_method_handler );
+	std::cout << "Server loaded up" << std::endl;
+    auto settings = make_shared< Settings >( );
+    settings->set_port( 80 + stoi(replica_id) );
+    settings->set_default_header( "Connection", "close" );
 
+    Service service;
+    service.publish( resource );
+    service.start( settings );
+	
+
+	// int result = Catch::Session().run(argc, argv);
+	
 	return 0;
 }

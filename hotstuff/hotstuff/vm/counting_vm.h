@@ -14,10 +14,10 @@ namespace hotstuff {
 class HotstuffLMDB;
 
 struct CountingVMBlockID {
-	std::optional<uint64_t> value;
+	std::optional<xdr::opaque_vec<>> value;
 
 	CountingVMBlockID() : value(std::nullopt) {}
-	CountingVMBlockID(uint64_t value) : value(value) {}
+	CountingVMBlockID(xdr::opaque_vec<> value) : value(value) {}
 
 	CountingVMBlockID(std::vector<uint8_t> const& bytes);
 
@@ -43,7 +43,7 @@ class CountingVM {
 
 public:
 
-	using block_type = uint64_t;
+	using block_type = xdr::opaque_vec<>;
 	using block_id = CountingVMBlockID;
 
 	static block_id nonempty_block_id(block_type const& blk) {

@@ -8,7 +8,7 @@ lerna-debug.log*
 
 # Hotstuff
 test0
-data_dir_0
+data_dir*
 aclocal.m4
 autom4te.cache/
 missing

@@ -107,6 +107,8 @@ HotstuffCore::update(const block_ptr_t& nblk) {
 void HotstuffCore::on_receive_vote(const PartialCertificate& partial_cert, block_ptr_t certified_block, ReplicaID voterid) {
 
 	HSC_INFO("recv vote on %s", debug::hash_to_str(certified_block -> get_hash()).c_str());
+	HSC_INFO("recv vote on %s", debug::hash_to_str(certified_block).c_str());
+	HSC_INFO("recv vote on %s", certified_block.c_str());
 
     auto& self_qc = certified_block -> get_self_qc();
 
