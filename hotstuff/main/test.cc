@@ -73,12 +73,18 @@ void post_method_handler( const shared_ptr< Session > session )
 		std::cout << "TEST TEST" << std::endl;
 		std::cout << body.data() << std::endl;
 		const std::string hash_string( body.data( ), body.data( ) + body.size( ) );
+		std::string hash_string_substr = hash_string.substr(10);
+		hash_string_substr.pop_back();
+		hash_string_substr.pop_back();
+		std::cout << "HASH SUBSTR" << std::endl;
+		std::cout << hash_string_substr << std::endl;
+
 		// cout << typeid(body.data()).name() << endl;
 
 
 		// std::string hash_string = body.data();
 		std::cout << "TEST STRING" << std::endl;
-		std::cout << hash_string << std::endl;
+		std::cout << hash_string_substr << std::endl;
 		bool res;
 		// HSC_INFO("HASH %s", hash_string);
 		if (stoi(replica_id) == 0) {
@@ -91,7 +97,7 @@ void post_method_handler( const shared_ptr< Session > session )
 
 			if (res)
 			{
-				confirmed_hashes.push_back(hash_string);
+				confirmed_hashes.push_back(hash_string_substr);
 			}
 
 			std::cout << (vm->get_last_committed_height() == 0);
