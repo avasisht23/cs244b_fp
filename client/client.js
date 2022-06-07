@@ -104,7 +104,7 @@ async function main() {
       if (err) {
         console.log(err, err.stack)
       }
-      else if (Object.keys(data).length === 0){
+      else if (Object.keys(data).length !== 0){
         // 4. getIndex(other filled order) <- Hotstuff via rest
         let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + data.Item.clientId.S)
         if(ourIndex < filledIndex){
