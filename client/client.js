@@ -68,7 +68,6 @@ async function main() {
       side: side,
       clientId: clientId
     }
-  console.log(clientId)
 
   let hashedOrder = createHash('sha256').update(`${asset}${limitPrice}${side}`).digest('hex') + "," + clientId.toString()
 
@@ -93,7 +92,7 @@ async function main() {
   var filledOrder = {
    TableName: TABLE_NAME,
    Key: {
-    'hash': {S: hashedOrder}
+    'hash': {S: hashedOrder.split(",")[0]}
    }
   }
 
