@@ -22,7 +22,8 @@ async function append(order, hashedOrder){
   await axios.post(`http://localhost:${hotStuffPort}/append`, {order: hashedOrder})
     .then(function (response) {
       console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${hotStuffPort}`);
-      r = response.data.index;
+      console.log(response.data)
+      r = response.data;
     })
     .catch(function (error) {
       console.log(`Failed submission ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${hotStuffPort}`);
@@ -50,7 +51,8 @@ async function getIndex(order, hashedOrder){
   await axios.get(`http://localhost:${hotStuffPort}/get_index?hash=${hashedOrder}`)
     .then(function (response) {
       console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${hotStuffPort}`);
-      r = response.data.index;
+      console.log(response.data)
+      r = response.data;
     })
     .catch(function (error) {
       console.log(`Failed to query ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${hotStuffPort}`);
@@ -98,7 +100,7 @@ async function main() {
 
   // 3. ping s3 bucket, if order found call getIndex on order and check if hash is after yours
   while (true){
-    const data = await ddb.getItem(filledOrder, async function(err, data) {
+    const res = await ddb.getItem(filledOrder, async function(err, data) {
       if (err) {
         console.log(err, err.stack)
       }
@@ -112,7 +114,9 @@ async function main() {
       }
     })
 
-    if (data.response.data) break;
+    console.log(res)
+
+    if (res.response.data) break;
 
     // Sleep
     await new Promise(resolve => setTimeout(resolve, sleepCadence));
