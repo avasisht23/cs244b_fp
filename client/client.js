@@ -22,7 +22,7 @@ async function append(order, hashedOrder){
   for (const port of hotStuffPorts) {
     await axios.post(`http://localhost:${port}/append`, {order: hashedOrder})
       .then(function (response) {
-        console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${port}`);
+        console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limitPrice} for client ${hashedOrder.split(",")[1]} to HotStuff Node ${port}`);
         if(port == 80){
           r = response.data;
         }
@@ -54,7 +54,7 @@ async function getIndex(order, hashedOrder){
   for (const port of hotStuffPorts) {
     await axios.get(`http://localhost:${port}/get_index?hash=${hashedOrder}`)
       .then(function (response) {
-        console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${port}`);
+        console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limitPrice} for client ${hashedOrder.split(",")[1]} from HotStuff Node ${port}`);
         if(port == 80){
           r = response.data;
         }
@@ -87,11 +87,11 @@ async function main() {
   // 2. submit order to darkpool
   await axios.post(`http://localhost:${darkpoolPort}/sendOrder`, order)
     .then(function (response) {
-      console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limitPrice}`);
+      console.log(`Successfully submitted ${side} order for asset $${asset} @ ${limitPrice} for client ${hashedOrder.split(",")[1]} on Dark Pool server`);
       token = response.data.orderNumber;
     })
     .catch(function (error) {
-      console.log(`Failed submission ${side} order for asset $${asset} @ ${limitPrice}`);
+      console.log(`Failed submission ${side} order for asset $${asset} @ ${limitPrice} on Dark Pool server`);
       console.log(`error: ${error}`);
     });
 
@@ -106,7 +106,7 @@ async function main() {
 
   // 3. ping s3 bucket, if order found call getIndex on order and check if hash is after yours
   while (true){
-    // TYPE 1 FRONTRUNNING: Another Client gets ahead of another in fill
+    // TYPE 1 FRONTRUNNING: Dark Pool frontruns client
     const res1 = await ddb.getItem(filledOrder1, async function(err, data) {
       if (err) {
         console.log(err, err.stack)
@@ -114,10 +114,8 @@ async function main() {
       else if (Object.keys(data).length !== 0){
         // 4. getIndex(other filled order) <- Hotstuff via rest
         let filledIndex = await getIndex(order, hashedOrder.split(",")[0] + "," + data.Item.clientId.S)
-        // 5. getIndex(our order) <- Hotstuff via rest
-        let ourIndex = await getIndex(order, hashedOrder.split(",")[0] + "," + clientId)
         // Was fake order created by darkpool (never appended)
-        if(filledIndex == -1 || ourIndex < filledIndex){
+        if(filledIndex == -1){
           console.log("FRONTRUNNING OCCURRED, CALL GARY");
         }
       }
