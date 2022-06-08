@@ -13,20 +13,24 @@ const {
 aws.config.update({accessKeyId: ACCESS_KEY_ID, secretAccessKey: SECRET_KEY, region: REGION});
 
 const darkpoolPort = 8000
-const hotStuffPort = 80 // 0th replica is leader. No rotation
+const hotStuffPorts = [80,81,82,83] // 0th replica is leader. No rotation
 const sleepCadence = 30000 // 30 seconds
 
 // Appends order to hotstuff ledger
 async function append(order, hashedOrder){
   var r;
-  await axios.post(`http://localhost:${hotStuffPort}/append`, {order: hashedOrder})
-    .then(function (response) {
-      console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${hotStuffPort}`);
-      r = response.data;
-    })
-    .catch(function (error) {
-      console.log(`Failed submission ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${hotStuffPort}`);
-    });
+  for (const port of hotStuffPorts) {
+    await axios.post(`http://localhost:${port}/append`, {order: hashedOrder})
+      .then(function (response) {
+        console.log(`Successfully submitted ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${port}`);
+        if(port == 80){
+          r = response.data;
+        }
+      })
+      .catch(function (error) {
+        console.log(`Failed submission ${order.side} order for asset $${order.asset} @ ${order.limitPrice} to HotStuff Node ${port}`);
+      });
+  }
   return r;
 }
 
@@ -47,14 +51,18 @@ async function getNewClientId(){
 // Gets index of order in hotstuff ledger
 async function getIndex(order, hashedOrder){
   var r;
-  await axios.get(`http://localhost:${hotStuffPort}/get_index?hash=${hashedOrder}`)
-    .then(function (response) {
-      console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${hotStuffPort}`);
-      r = response.data;
-    })
-    .catch(function (error) {
-      console.log(`Failed to query ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${hotStuffPort}`);
-    });
+  for (const port of hotStuffPorts) {
+    await axios.get(`http://localhost:${port}/get_index?hash=${hashedOrder}`)
+      .then(function (response) {
+        console.log(`Successfully queried ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${port}`);
+        if(port == 80){
+          r = response.data;
+        }
+      })
+      .catch(function (error) {
+        console.log(`Failed to query ${order.side} order for asset $${order.asset} @ ${order.limitPrice} from HotStuff Node ${port}`);
+      });
+  }
   return r;
 }
 
