@@ -1,29 +1,16 @@
-# cs244b_fp
+# CS244b Final Project
+## Jacob Chudnovsky, Henry Friedlander, Ajay Vasisht, Federico Zalcberg
 
-## Hotstuff
+### Summary
+Darkpools are exchanges, in which prior to matching, a counterparty does not need to publicly broadcast their trading intentions. This is useful for traders wishing to dump a large amount of an asset quickly. Centralized darkpools have been demonstrated to not be equitable for the trades since the darkpool operators place priority on their own trades rather than external trades. In this paper, we introduce the FRED system architecture to ensure that the darkpool mechanism treats trades according to equitable matching rules. We achieve this by publishing a BFT public ledger of hashed transactions.
 
-Make sure to mkdir this ```/usr/local/Cellar/lmdb/0.9.29/lib/pkgconfig/lmdb.pc``` file and add 
-```
-prefix=/usr/local/Cellar/lmdb/0.9.29
-exec_prefix=${prefix}
-libdir=${prefix}/lib
-includedir=${prefix}/include
+## Important Files To Look at
 
-Name: lmdb
-Version: 0.9.29
-Description: Sketchy PC file I handrolled
+### client/client.js
+This is the code that each client (that is, user of a darkpool/hotstuff) uses. It has the logic for submitting orders to both the darkpool and distributed ledger. It also has the logic that checks for frontrunning asynchrounously.
 
-Libs: -L${libdir} -llmdb
-Cflags: -I${includedir}
-```
+### server/server.js
+This is the code that runs the simplified darkpool. It accepts orders from clients and matches them, uploading "settlement" matches to an aws file. Note that in order to make this repo public for the course, we redacted the aws secrets. This server can be hit via various HTTP endpoints to modify it's behavior (for frontrunning purposes) — see server/README.md for details.
 
-And then symlink with ```ln -s /usr/local/Cellar/lmdb/0.9.29/lib/pkgconfig/lmdb.pc /usr/local/lib/pkgconfig/lmdb.pc```
-
-Then to run, do:
-
-```
-./autogen.sh
-./configure
-make -j
-./test
-```
+### hotstuff/
+This is our modified hotstuff implementation for this project. More information can be found at hotstuff/README.md

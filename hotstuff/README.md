@@ -1,6 +1,8 @@
 # Standalone Hotstuff Implementation
 
-Based on the Hotstuff paper by Maofan Yin, Dahlia Malkhi, Michael K Reiter, Guy Nolan Gueta,
+This implementation was forked from Geoff Ramseyer's implemention of Hotstuff (https://github.com/gramseyer/hotstuff) for his SPEEDEX implementation,
+and pulled this code out of there so as to have a standalone implementation.
+It was originally based on the Hotstuff paper by Maofan Yin, Dahlia Malkhi, Michael K Reiter, Guy Nolan Gueta,
 and Ittai Abraham.
 
 The implementation is closely based on the implementation at github.com/hot-stuff/libhotstuff.
@@ -43,7 +45,33 @@ Contributions of any kind are very welcome.
 
 `make test` for tests
 
-Requires a C++2a-capable compiler.
+
+Make sure to mkdir this ```/usr/local/Cellar/lmdb/0.9.29/lib/pkgconfig/lmdb.pc``` file and add 
+```
+prefix=/usr/local/Cellar/lmdb/0.9.29
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: lmdb
+Version: 0.9.29
+Description: Sketchy PC file I handrolled
+
+Libs: -L${libdir} -llmdb
+Cflags: -I${includedir}
+```
+
+And then symlink with ```ln -s /usr/local/Cellar/lmdb/0.9.29/lib/pkgconfig/lmdb.pc /usr/local/lib/pkgconfig/lmdb.pc```
+
+Then to run, do:
+
+```
+./autogen.sh
+./configure
+make -j
+./test
+```
+
 
 ## API Usage
 
@@ -76,20 +104,3 @@ and knowledge of which blocks committed, so it can access all the information it
 to recover.  
 
 Recovery after disk loss not implemented.
-
-# TODO
-
-This implementation needs e2e tests and examples. There are almost no unit tests.
-Was manually tested carefully during development -- but this implementation
-should not be used in production or for a safety-critical system, at least 
-not until the implementation can be more thoroughly tested and audited.
-
-# History
-
-I wrote this for my SPEEDEX implementation, and pulled this code out of there
-so as to have a standalone implementation.
-
-I have not yet configured autotools to behave properly with this package when included
-as a submodule (or set up integration with any kind of package system).  Files might
-get rearranged if/when I adjust the package format.
-
