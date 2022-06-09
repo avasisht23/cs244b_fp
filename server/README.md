@@ -11,26 +11,17 @@ Some of the commands it can take are:
 #### To send an order:
 `POST http://localhost:8000/sendOrder` 
 with a raw JSON body formatted as such:
-{
-    "asset": "AAPL",
-    "limitPrice": 100,
-    "side": "BID",
-    "clientId": 0
-}
+`{ "asset": "AAPL", "limitPrice": 100, "side": "BID","clientId": 0}`
 
 Expected return value:
-{
-    "orderNumber": INTEGER
-}
+`{"orderNumber": 0}`
 
 
 #### To get a unique client ID (such as when first time connecting to the darkpool):
 `GET http://localhost:8000/getNewClientId` 
 
 Expected return value:
-{
-    "clientId": 0
-}
+`{"clientId": 0}`
 
 ## To be used only by operator (secrets that the client shouldn't have access to in a Prod setting)
 
@@ -38,6 +29,7 @@ Expected return value:
 `GET http://localhost:8000/getState` 
 
 Expected return value:
+```
 {
     "bidsInPool": [
         {
@@ -68,12 +60,13 @@ Expected return value:
         }
     ]
 }
+```
 
 #### To change the fairness level [0.0 - 1.0] where 1.0 means 100% fair and 0.0 means it will always try to frontrun
 `POST http://localhost:8000/setFairness` 
 
 with a raw JSON body formatted as such:
-{"fairnessCoefficient": 0.0}
+`{"fairnessCoefficient": 0.0}`
 
 
 # Practical advice
